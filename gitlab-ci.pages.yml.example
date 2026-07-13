@@ -1,0 +1,16 @@
+# GitLab CI/CD — публикация 16_grid на GitLab Pages
+# Скопируйте этот файл в корень репозитория weblayout как .gitlab-ci.yml
+
+image: alpine:latest
+
+pages:
+  stage: deploy
+  script:
+    - mkdir -p public/16_grid
+    - cp -r 16_grid/* public/16_grid/
+    - cp 16_grid/index.html public/index.html
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "master"
